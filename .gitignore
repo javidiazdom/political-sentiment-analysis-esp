@@ -1,2 +1,3 @@
 models/*
 secret.py
+*.bin
