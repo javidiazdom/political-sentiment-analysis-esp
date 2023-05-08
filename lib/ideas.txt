@@ -1,0 +1,1 @@
+https://www.kaggle.com/code/adityaraj1506/lstm-model-for-text-classification  PROBAR CON LTSTM Y CON UN MODELO CUSTOM
