@@ -48,7 +48,7 @@ def eval_model(model, data_loader, device, n_examples):
             labels_ids = d['labels'].cpu().flatten().numpy()
             preds = np.argmax(logits, axis=1).flatten()
             targ = d['labels'].numpy()
-            y_val.extend(targ.tolist())
+            y_targ.extend(targ.tolist())
             y_pred.extend(preds.tolist())
             correct_predictions += np.sum(preds==targ)
             losses.append(loss.item())
@@ -72,5 +72,6 @@ def train(EPOCHS, model, train_data_loader, optimizer, device, scheduler, histor
     return history
 
 def test(model, test_data_loader, device, test_len):
-    test_acc, test_loss = eval_model(model, test_data_loader, device, test_len)
+    test_acc, test_loss, test_f1  = eval_model(model, test_data_loader, device, test_len)
     print(f'Test loss: {round(test_loss, 3)} Accuracy: {round(test_acc, 3)}')
+    return test_acc, test_loss, test_f1  

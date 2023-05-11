@@ -43,9 +43,7 @@ class TweetsDataset(Dataset):
         }
 
 def split_test_val(df, test_size = 0.15, valid_size = 0.15):
-    X_train, X_test, y_train, y_test = train_test_split(df[['tweets']], df['labels'],stratify=df['labels'], test_size=0.15, random_state = 0)
-    X_train, X_valid, y_train, y_valid = train_test_split(X_train, y_train, stratify=y_train, test_size=0.15)
+    X_train, X_val, y_train, y_val = train_test_split(df[['tweets']], df['labels'],stratify=df['labels'], test_size=0.15, random_state = 0)
     df_train = pd.concat([pd.DataFrame({'tweets': X_train['tweets'].values}),pd.DataFrame({'labels': y_train.values})], axis = 1)
-    df_test = pd.concat([pd.DataFrame({'tweets': X_test['tweets'].values}),pd.DataFrame({'labels': y_test.values})], axis = 1)
-    df_valid = pd.concat([pd.DataFrame({'tweets': X_valid['tweets'].values}),pd.DataFrame({'labels': y_valid.values})], axis = 1)
-    return df_train, df_test, df_valid
+    df_valid = pd.concat([pd.DataFrame({'tweets': X_val['tweets'].values}),pd.DataFrame({'labels': y_val.values})], axis = 1)
+    return df_train, df_valid
