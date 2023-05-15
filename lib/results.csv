@@ -1,5 +1,8 @@
-,Unnamed: 0,model,class,f1score,loss,accuracy
-0,0.0,bertin-base,ideology-multiclass,0.3925,0.8267509487602446,0.3925
-1,1.0,newtral-xml,ideology-multiclass,0.4000000000000001,0.5317269118626913,0.4
-2,0.0,xml-roberta-base,ideology-multiclass,0.1222222222222222,0.6940428868929545,0.1222222222222222
-0,,berto-base-uncased,ideology-multiclass,0.4475,0.4973551917076111,0.4475
+,model,class,f1score,loss,accuracy
+0,bertin-base,ideology-multiclass,0.3925,0.8267509487602446,0.3925
+1,newtral-xml,ideology-multiclass,0.4000000000000001,0.5317269118626913,0.4
+2,xml-roberta-base,ideology-multiclass,0.1222222222222222,0.6940428868929545,0.1222222222222222
+3,berto-base-uncased,ideology-multiclass,0.4475,0.4973551917076111,0.4475
+4,newtral-xml,ideology-multiclass,0.4000000000000001,0.5319609105587005,0.4
+5,roberta,ideology-multiclass,0.3841666666666666,0.5426545865668191,0.3841666666666666
+6,bertin-base,ideology-multiclass,0.3925,0.8267509487602446,0.3925

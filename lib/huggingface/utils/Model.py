@@ -1,5 +1,6 @@
 import torch.nn.functional as F
 from sklearn.metrics import f1_score
+from collections import defaultdict
 import numpy as np
 import torch
 import sys
@@ -27,7 +28,6 @@ def train_epoch(model, data_loader, optimizer, device, scheduler, n_examples):
         optimizer.step()
         scheduler.step()
         optimizer.zero_grad()
-        sys.stdout.write("\033[K")
     return correct_predictions / n_examples, np.mean(losses)
 
 def eval_model(model, data_loader, device, n_examples):
@@ -54,7 +54,8 @@ def eval_model(model, data_loader, device, n_examples):
             losses.append(loss.item())
     return correct_predictions / n_examples, np.mean(losses), f1_score(y_targ, y_pred, average='micro')
 
-def train(EPOCHS, model, train_data_loader, optimizer, device, scheduler, history, train_len, valid_len = 0, valid_data_loader = None):
+def train(EPOCHS, model, train_data_loader, optimizer, device, scheduler, train_len, valid_len = 0, valid_data_loader = None):
+    history = defaultdict(list)
     for epoch in range(EPOCHS):
         print(f'Epoch {epoch + 1}/{EPOCHS}')
         print('-'*10)
