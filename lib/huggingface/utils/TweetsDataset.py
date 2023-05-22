@@ -3,17 +3,6 @@ import torch
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-def create_data_loader(df, tokenizer, batch_size = 16):
-    ds = TweetsDataset(
-        tweets=df.tweets.to_numpy(),
-        labels=df.labels.to_numpy(),
-        tokenizer=tokenizer
-    )
-    return DataLoader(
-        ds,
-        batch_size=batch_size
-    )
-
 class TweetsDataset(Dataset):
     def __init__(self, tweets, labels, tokenizer):
         self.tweets = tweets; 
@@ -42,8 +31,20 @@ class TweetsDataset(Dataset):
             'labels': torch.tensor(label, dtype=torch.long)
         }
 
-def split_test_val(df, test_size = 0.15, valid_size = 0.15):
-    X_train, X_val, y_train, y_val = train_test_split(df[['tweets']], df['labels'],stratify=df['labels'], test_size=0.15, random_state = 0)
+def split_test_val(df, valid_size = 0.15):
+    X_train, X_val, y_train, y_val = train_test_split(df[['tweets']], df['labels'],stratify=df['labels'], test_size=valid_size, random_state = 0)
     df_train = pd.concat([pd.DataFrame({'tweets': X_train['tweets'].values}),pd.DataFrame({'labels': y_train.values})], axis = 1)
     df_valid = pd.concat([pd.DataFrame({'tweets': X_val['tweets'].values}),pd.DataFrame({'labels': y_val.values})], axis = 1)
     return df_train, df_valid
+
+
+def create_data_loader(df, tokenizer, batch_size = 16):
+    ds = TweetsDataset(
+        tweets=df.tweets.to_numpy(),
+        labels=df.labels.to_numpy(),
+        tokenizer=tokenizer
+    )
+    return DataLoader(
+        ds,
+        batch_size=batch_size
+    )
